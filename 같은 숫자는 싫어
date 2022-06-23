@@ -1,0 +1,32 @@
+import java.util.*;
+
+public class _9 {
+    public static void main(String[] args) {
+        int[] arr = {1, 1,3, 1, 3, 0, 1, 1};//1,3,1,3,0,1
+        for (int i = 0; i < solution(arr).length; i++)
+            System.out.println(solution(arr)[i]);
+    }
+
+    public static int[] solution(int[] arr) {
+        //같은 숫자 제거하기
+        //1,1,3,3,0,1,1-> 1,3,0,1
+        List<Integer> list = new ArrayList<>();
+        int last = -1;
+        for (int i=0;i<arr.length;i++) {
+            if(last==arr[i])continue;
+                list.add(arr[i]);
+                last = arr[i];
+
+
+        }
+        int[] answer = new int[list.size()];
+          for(int j = 0; j < list.size(); j++){
+            answer[j] = list.get(j);  
+        }
+
+
+
+
+            return answer;
+        }
+    }
