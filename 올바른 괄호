@@ -1,0 +1,27 @@
+  import java.util.*;
+public class _10 {
+    public static void main(String[] args) {
+        String s = "())(()";
+        System.out.println(solution(s));
+
+    }
+    public static boolean solution(String s) {
+        //올바른 괄호
+        //앞에서 꺼내오든 뒤에서 꺼내오든 괄호의 짝이 맞으면 true 아니면 false
+       
+        char[] ch = new char[s.length()];
+        int count = 0;
+        ch = s.toCharArray();
+        for(int i = 0;i < ch.length; i++){
+            if(ch[i] == '(')
+                count++;
+            else {
+                if(count == 0)// 반드시 '(' 로 시작해야 하기 때문에 조건 삽입
+                    return false;
+                count--;
+            }
+
+        }
+        return count == 0;
+    }
+}
