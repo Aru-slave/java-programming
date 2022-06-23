@@ -1,0 +1,25 @@
+import java.util.*;
+public class _10 {
+    public static void main(String[] args) {
+        String s = "())(()";
+        System.out.println(solution(s));
+
+    }
+    public static boolean solution(String s) {
+        //올바른 괄호
+        //앞에서 꺼내오든 뒤에서 꺼내오든 괄호의 짝이 맞으면 true 아니면 false
+        //큐든 스택이든 상관없을 듯
+       Stack<Character> stack = new Stack<>();
+       for(char c : s.toCharArray()){
+           if(c == '(')
+               stack.push('c');
+           else{
+               if(stack.isEmpty())return false;
+               stack.pop();
+           }
+
+       }
+
+        return stack.isEmpty();
+    }
+}
