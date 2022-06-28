@@ -1,0 +1,39 @@
+import java.util.*;
+
+public class _11 {
+    public static void main(String[] args) {
+    int[] pr = {93, 30, 55};
+    int[] sp = {1, 30, 5};
+
+    solution(pr,sp);
+    }
+    public static int[] solution(int[] progresses, int[] speeds) {
+        //기능 개발
+        //[93,30,55],[1,30,5] = [2,1] -> [7,3,9]
+        //[95,90,99,99,80,99],[1,1,1,1,1,1] = [1,3,2] -> [5,10,1,1,20,1]
+
+        Queue<Integer> queue = new LinkedList<>();
+        for(int i = 0; i < progresses.length; i++)
+                queue.add((int)Math.ceil((double)(100-progresses[i]) / speeds[i]));//int/int = int이기 때문에 변수 하나를 double로 바꾸고 ceil로 올림 처리
+        System.out.println(queue);
+        List<Integer> list = new LinkedList<>();
+        int max = queue.poll();
+        int count = 1;
+
+        while(!queue.isEmpty()){
+            if(max < queue.peek()) {//max값이 다음 값보다 작을 경우 count를 반환. 반환되는 갯수를 모르기 때문에 리스트 사용
+                max = queue.poll();
+                list.add(count);
+                count = 1;
+            }
+            else{
+                queue.poll();//작지 않은 경우는 큐에서 값만 빼내고 카운트 값 증가
+                count++;
+            }
+            if(queue.isEmpty())// 맨 마지막 count값 반환 하기 위해서 처리
+                list.add(count);
+        }
+
+        return list.stream().mapToInt(Integer :: intValue).toArray();
+    }
+}
