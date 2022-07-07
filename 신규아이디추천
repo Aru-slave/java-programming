@@ -1,0 +1,21 @@
+import java.util.LinkedList;
+import java.util.List;
+
+class Solution {
+    public String solution(String new_id) {
+        String check = new_id.toLowerCase();//소문자로 치환 1단계
+        check = check.replaceAll("[^-_.a-z0-9]", "");//-_.a-z0-9를 제외하고 제거 2단계
+        check = check.replaceAll("[.]{2,}", ".");//.이 연속되게 나올 때 하나 제거 3단계
+        check = check.replaceAll("^[.]|[.]$", "");//^->문자열의 시작,$문자열의 종료
+        if(check.length() >= 16){
+            check = check.substring(0, 15);//15글자까지만 출력 ->substring(start index, end index) start index 부터 end index-1까지 출력
+        }
+        check = check.replaceAll("[.]$", "");
+        if(check.isEmpty())
+            check += "a";
+        while(check.length()<=2)
+        check += check.substring(check.length()-1);
+        
+    return check;
+    }
+}
