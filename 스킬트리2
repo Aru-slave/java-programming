@@ -1,0 +1,21 @@
+import java.util.Locale;
+
+public class _16 {
+    public static void main(String[] args) {
+    String skill = "CBD";
+    String[] skill_trees = {"BACDE", "CBADF", "AECB", "BDA"};
+        System.out.println(solution(skill, skill_trees));
+    }
+    public static int solution(String skill, String[] skill_trees) {
+        //스킬트리 : 주어진 스킬 순서대로 스킬 트리안에 들어갔으면 true, 아니면 false 반환
+        int count = 0;
+        for(int i = 0; i < skill_trees.length; i++) {
+                skill_trees[i] = skill_trees[i].replaceAll("[^" + skill + "]","");//스킬에 존재하는 문자열을 제외하고 제거
+        }
+        for(int i = 0; i < skill_trees.length; i++)
+            if(skill_trees[i].equals(skill.substring(0,skill_trees[i].length()))||skill_trees[i].isEmpty())//스킬의 문자열 순서와 일치하는지 체크
+                count++;
+
+        return count;
+    }
+}
