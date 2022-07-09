@@ -1,0 +1,27 @@
+public class _15 {
+    public static void main(String[] args) {
+    String s = "pPoooyY";
+        System.out.println(solution(s));
+    }
+       public static boolean solution(String s){
+        //p의 개수와 y의 개수 비교하기
+           //같으면 true 다르면 false
+           boolean answer = true;
+           s = s.toLowerCase();//대소문자 구별하지 않기 때문에 소문자로 변환
+           /*s = s.replaceAll("[^py]", "");//p와 y를 제외한 문자 제거
+           if(s.length() % 2 != 0 && s.length() != 0) //문자열의 길이가 홀수이면서 0이 아니면 리턴 false
+               return false;
+           if(s.length() == 0)//p와 y가 하나도 없을 경우 리턴 true
+               return true;*/ //굳이 p와 y를 제외한 문자들을 제거할 필요는 없다.
+           int count = 0;
+           for(int i = 0; i < s.length(); i++){
+               if(s.charAt(i) == 'p')
+                   count++;
+               else if (s.charAt(i) == 'y')
+                   count--;
+           }
+           if(count == 0)
+               return true;
+           else return false;
+        }
+}
