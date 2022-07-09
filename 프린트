@@ -1,0 +1,46 @@
+import java.util.*;
+
+public class _13 {
+    public static void main(String[] args){
+        int[] priorities = {2, 1, 3, 2};
+        int location = 2;
+        System.out.println(solution(priorities,location));
+    }
+    public static int solution(int[] priorities, int location) {
+
+        //프린터
+        //중요도에 따라 출력 순서가 달라짐
+        //[2, 1, 3, 2]-> location : 2	 return : 1 -> 3 2 2 1
+        //중요도가 더 큰 값이 있으면 대기목록 맨 뒤로 위치시키게 하기.
+        //중요도를 비교하면서 내위치가 있는지의 두 가지 의미를 가짐 -> 새로운 클래스 생성
+        List<Integer> list = new LinkedList<>();
+        int count = 1;
+        for(int i : priorities)
+            list.add(i);
+        while(!list.isEmpty()) {
+            int num = list.size();
+            int now = list.remove(0);
+
+            for (int i = 0; i < list.size(); i++) {
+                if (now < list.get(i)) {// 더 큰 중요도를 가진 자료가 있을 경우
+                    list.add(now);
+                    if (location != 0)//한칸 앞으로 땡김
+                        location--;
+                        else
+                        location = list.size() - 1;//맨 뒤로 보냄
+                    break;
+                }
+            }
+            if(num != list.size())//리스트에서 가장 큰 중요도를 가진 자료가 지워졌을 경우
+            {
+
+                if(location == 0)//지워진 자료가 내가 찾는 자료일 경우
+                    return count;
+                else  {count++;location--;};//내가 찾는 자료가 아닐 경우
+            }
+        }
+        return count;
+
+    }
+}
+
