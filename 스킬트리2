@@ -11,11 +11,18 @@ public class _16 {
         int count = 0;
         for(int i = 0; i < skill_trees.length; i++) {
                 skill_trees[i] = skill_trees[i].replaceAll("[^" + skill + "]","");//스킬에 존재하는 문자열을 제외하고 제거
-        }
-        for(int i = 0; i < skill_trees.length; i++)
-            if(skill_trees[i].equals(skill.substring(0,skill_trees[i].length()))||skill_trees[i].isEmpty())//스킬의 문자열 순서와 일치하는지 체크
+                 if(skill.startsWith(skill_trees))//스킬의 문자열 순서와 일치하는지 체크
                 count++;
+        }
+       
+           
 
         return count;
     }
 }
+
+#2 stream 이용 방법
+return (int) Arrays.stream(skill_trees)
+                .map(s -> s.replaceAll("[^"+skill+"]",""))
+                .filter(s -> skill.startsWith(s))
+                .count();
