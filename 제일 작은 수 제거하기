@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class _17 {
+    public static void main(String[] args) {
+    int[] arr = {4,3,2,1};
+    for(int i = 0; i < solution(arr).length; i++)
+        System.out.println(solution(arr)[i]);
+    }
+    public static int[] solution(int[] arr) {
+
+        List<Integer> list = new ArrayList<>(arr.length);
+        if(arr.length == 1)
+            return new int[] {-1};//배열 길이가 1일 경우 -1 리턴
+
+        for(int i = 0; i < arr.length; i++)
+            list.add(arr[i]);
+
+        Arrays.sort(arr);//리스트에 먼저 넣고 정렬을 해야 원래 자료 순서를 보존할 수 있음.
+
+        list.remove(list.indexOf(arr[0]));//정렬 후 제일 작은 값 제거
+
+         return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+}
