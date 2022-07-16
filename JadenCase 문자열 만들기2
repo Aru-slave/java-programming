@@ -1,0 +1,22 @@
+import java.util.Arrays;
+import java.util.Locale;
+import java.lang.String;
+
+public class _19 {
+    public static void main(String[] args) {
+    String s = "for the laft week";
+        System.out.println(solution(s));
+    }
+    public static String solution(String s) {
+        String answer = "";
+        String[] sp = s.toLowerCase().split("");//String 배열로 변환해야 toUppercase함수를 사용가능하다.
+        boolean flag = true;
+
+        for(String ss : sp) {
+            answer += flag ? ss.toUpperCase() : ss;
+            flag = ss.equals(" ") ? true : false;//마찬가지고 equals함수를 이용하기 위해서는 String배열을 이용해야 한다. 
+        }
+
+        return answer;
+    }
+}
