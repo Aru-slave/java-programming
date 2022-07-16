@@ -1,0 +1,22 @@
+import java.util.Arrays;
+
+public class _20 {
+    public static void main(String[] args) {
+    int[] citations = {3, 0, 6, 1, 5};
+        System.out.println(solution(citations));
+    }
+    public static int solution(int[] citations) {
+        Arrays.sort(citations);
+
+        int result = 0;
+        for (int i = 0; i < citations.length; i++) {
+            int h = citations.length-i;		// h는 모든 논문 중 현재 논문 이상으로 인용된 논문의 개수
+            if (citations[i] >= h) { // h보다 크거나 같으면 그 수가 바로 H 인덱스 이고 i가 커질 수록 h 인덱스는 작아지기 때문에 바로 리턴
+                result = h;
+                return result;
+            }
+        }
+
+    return result;
+    }
+}
