@@ -1,0 +1,34 @@
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class _21 {
+    public static void main(String[] args) {
+    int n = 3;
+    int[][] computers = {{1, 1, 0}, {1, 1, 0}, {0, 0, 1}};
+        System.out.println(solution(n, computers));
+    }
+    public static int solution(int n, int[][] computers){
+        int answer = 0;
+        boolean[] visited = new boolean[n];
+        for(int i = 0; i < n;i++){
+            if(visited[i]) continue;//이미 방문했으면 다음 탐색
+            answer++;//
+            dfs(i, computers, visited);
+        }
+
+        return answer;
+
+    }
+    static void dfs(int n, int[][] computers , boolean[] visited){
+        Queue<Integer> queue = new LinkedList<>();//큐를 사용하면 bfs 스택을 사용하면 dfs
+        queue.offer(n);
+        while(!queue.isEmpty()){
+            int i = queue.poll();
+            visited[i] = true; // 방문한 노드를 표시
+            for(int j = 0; j < computers[i].length; j++){
+                if(visited[j]) continue;//이미 방문했으면 다음 탐색
+                if(computers[i][j] == 1) queue.offer(j);//방문한 노드가 서로 연결되어 있으면 큐에 오퍼
+            }
+        }
+    }
+}
