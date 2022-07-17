@@ -1,0 +1,25 @@
+public class _22 {
+    static int answer = 0;
+    public static void main(String[] args) {
+        int[] numbers = {1, 1, 1, 1, 1};
+        int target = 3;
+        System.out.println(solution(numbers, target));
+    }
+    public static int solution(int[] numbers, int target) {
+        //타켓 넘버
+        //배열에 있는 숫자들을 더하고 뺴서 타겟 넘버가 되는 경우의 수를 리턴하기
+        dfs(numbers, 0, 0, target);
+        return answer;
+    }
+    public static void dfs(int[] numbers, int depth, int sum, int target){
+            if(depth == numbers.length){
+                if(sum == target)
+                    answer++;
+                return;
+            }
+        else{
+            dfs(numbers, depth+1, sum + numbers[depth], target);
+            dfs(numbers, depth+1, sum - numbers[depth], target);
+        }
+    }
+}
