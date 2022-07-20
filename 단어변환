@@ -1,0 +1,53 @@
+import java.util.*;
+
+public class _23 {
+    public static void main(String[] args) {
+        String begin = "hit";
+        String target = "cog";
+        String[] words = {"hot", "dot", "dog", "lot", "log", "cog"};
+        System.out.println(solution(begin, target, words));
+    }
+    static class Word{
+        String word;
+        int depth;
+
+     Word(String s, int d){word = s; depth = d;}//각 워드마다 depth를 줘서 depth를 리턴하도록 함
+    }
+
+    public static int solution(String begin, String target, String[] words) {
+
+        if (!Arrays.asList(words).contains(target)) return 0;
+
+
+        return dfs(begin, words, target);
+    }
+
+    public static int dfs(String begin, String[] words, String target) {
+        Stack<Word> q = new Stack<>();//깊이 우선 탐색
+        Set<String> set = new HashSet<>();//탐색한 노드를 중복해서 탐색하지 않기 위해 set에 저장
+        q.push(new Word(begin,0));//맨 위 상위 노드를 stack에 저장.
+
+        while (!q.isEmpty()) {
+            Word now = q.pop();//스택에  저장한 정보를 꺼내옴.
+            if (now.word.equals(target)) return now.depth;
+            for (String s : words) {//for 문을 통해 상위 노드와 연결된 노드 탐색
+                if (set.contains(s)) continue;
+                if (checkNextString(s, now.word)) {//스택에서 꺼낸 노드와 인접한 노드 탐색
+                    q.push(new Word(s, now.depth + 1));// 인접 노드를 스택에 저장
+                    set.add(s);// 중복해서 탐색을 하지 않기 위해 set에 저장
+                }
+            }
+        }return 0;
+    }
+
+    public static boolean checkNextString(String s1, String s2){//다음에 올 수 있는 단어인지 판단하기
+        int count = 0;
+        int min = Math.min(s1.length(),s2.length());
+        for(int i = 0; i < min ; i++){
+            if(s1.charAt(i) != s2.charAt(i))// 중복되는 글자수가 1이면 true, 아니면 false
+                count++;
+        }
+        return count == 1;
+
+    }
+}
