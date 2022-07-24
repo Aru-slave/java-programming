@@ -1,0 +1,47 @@
+import java.util.*;
+class Solution {
+  public class Position{
+        public int x;
+        public int y;
+        public int depth;
+
+        public Position(int x, int y, int depth) {
+            this.x = x;
+            this.y = y;
+            this.depth = depth;
+        }
+
+    }
+    public int solution(int[][] maps) {
+
+        int answer = -1;
+        Queue<Position> now = new LinkedList<>();
+        now.add(new Position(0,0,0));
+        maps[0][0] = 0;
+
+        while(!now.isEmpty()){
+            Position current = now.poll();
+            if(current.x == maps.length-1 && current.y == maps[0].length-1) {
+                    answer = current.depth+1;
+                    break;
+            }
+            if(current.x > 0 && maps[current.x-1][current.y] == 1){
+                maps[current.x-1][current.y] = 0;
+                now.add(new Position(current.x-1, current.y, current.depth + 1));
+            }
+            if(current.y > 0 && maps[current.x][current.y-1] == 1) {
+                maps[current.x][current.y - 1] = 0;
+                now.add(new Position(current.x, current.y - 1, current.depth + 1));
+            }
+            if(current.x < maps.length-1 && maps[current.x+1][current.y] == 1){                 
+                maps[current.x + 1][current.y] = 0;
+                now.add(new Position(current.x + 1, current.y, current.depth + 1));
+            }
+            if(current.y < maps[0].length - 1 && maps[current.x][current.y+1] == 1) {
+                maps[current.x][current.y+1] = 0;
+                now.add(new Position(current.x, current.y+1, current.depth + 1));
+            }
+        }
+        return answer;
+    }
+}
