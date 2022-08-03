@@ -1,0 +1,28 @@
+
+import java.util.PriorityQueue;
+
+public class _26 {
+    public static void main(String[] args) {
+    int[] scoville = {1, 2, 3, 9, 10, 12};// 더 맵게 -> k 이하 수치를 k 이상으로 변환하는 함수 구현
+    int k = 7;
+        System.out.println(solution(scoville,k));
+    }
+    public static int solution(int[] scoville, int k){
+            PriorityQueue<Integer> heap = new PriorityQueue<>();
+            //우선 큐 -> 큐 +  정렬
+            //그냥 선언하면 오름차순 Collections.reverseOrder하면  내림차순
+            for(int i = 0; i < scoville.length; i++){
+                heap.add(scoville[i]);
+            }
+            int count = 0;
+            while(heap.peek() < k){//주어진 수치가 k보다 작을경우 계속 루프
+                if(heap.size() < 2) return -1;
+                int min1 = heap.poll();
+                int min2 = heap.poll();
+                heap.add(min1 + min2*2);//제일 작은 값과 그 다음 값으로 새로운 수치 형성
+                count++;
+            }
+            return count;
+    }
+
+}
