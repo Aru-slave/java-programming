@@ -1,0 +1,92 @@
+//로마 숫자를 변환해서 합을 구하는 문제
+//경우의 수를 나눠서 풀이
+
+class Solution {
+    public int romanToInt(String s) {
+        int ans = 0, num = 0, answer = 0;
+        for (int i = 0; i < s.length(); i++) {
+            if (i != s.length() - 1) {
+                switch (s.charAt(i)) {
+                    case 'I':{
+                        if(s.charAt(i + 1) == 'V') {
+                            num = 4;
+                            break;
+                        }
+                        if(s.charAt(i + 1) == 'X') {
+                            num = 4;
+                            break;
+                        }
+
+                    }
+                        num = 1;
+                        break;
+                    case 'V':
+                        num = 5;
+                        break;
+                    case 'X':{
+                        if(s.charAt(i + 1) == 'L') {
+                            num = 40;
+                            break;
+                        }
+                        if(s.charAt(i + 1) == 'C') {
+                            num = 90;
+                            break;
+                        }
+
+                    }
+                        num = 10;
+                        break;
+                    case 'L':
+                        num = 50;
+                        break;
+                    case 'C':{
+                        if(s.charAt(i + 1) == 'D') {
+                            num = 400;
+                            break;
+                        }
+                        if(s.charAt(i + 1) == 'M') {
+                            num = 900;
+                            break;
+                        }
+
+                    }
+                        num = 100;
+                        break;
+                    case 'D':
+                        num = 500;
+                        break;
+                    case 'M':
+                        num = 1000;
+                        break;
+                }
+            }
+            else {
+                switch (s.charAt(i)) {
+                    case 'I':
+                        num = 1;
+                        break;
+                    case 'V':
+                        num = 5;
+                        break;
+                    case 'X':
+                        num = 10;
+                        break;
+                    case 'L':
+                        num = 50;
+                        break;
+                    case 'C':
+                        num = 100;
+                        break;
+                    case 'D':
+                        num = 500;
+                        break;
+                    case 'M':
+                        num = 1000;
+                        break;
+                }
+            }
+            ans = ans + num;
+        }
+        return ans;
+    }
+}
