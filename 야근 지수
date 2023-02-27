@@ -1,0 +1,23 @@
+import java.util.*;
+class Solution {
+    public long solution(int n, int[] works) {
+        PriorityQueue<Integer> q = new PriorityQueue<>(Collections.reverseOrder());
+        for(int i : works) {
+            q.offer(i);
+        }
+        
+        while(n > 0 ) {
+            int work = q.poll();//최댓값을 빼준다.
+            if(work == 0) break; 
+            work--; 
+            q.offer(work);
+            n--;
+        }
+        
+        long answer = 0;
+        for(int work : q) {
+            answer = answer + work * work;
+        }
+        return answer;
+    }
+}
