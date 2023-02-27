@@ -1,0 +1,31 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.PriorityQueue;
+
+class Solution {
+    public int[] solution(String[] operations) {
+        List<Integer> list = new ArrayList<>();
+        int[] ans = new int[2];
+        for(String str : operations){
+            if(str.startsWith("I")){
+               list.add(Integer.parseInt(str.substring(2)));
+               Collections.sort(list);
+            }
+            if(list.size() != 0){
+            if(str.equals("D 1"))
+                list.remove(list.size()-1);
+            if(str.equals("D -1"))
+                list.remove(0);
+            }
+        }
+        if(!list.isEmpty()){
+            ans[0] =  list.remove(list.size() - 1);
+           
+        }
+        
+        if(!list.isEmpty())
+        ans[1] =  list.remove(0);
+        return ans;
+    }
+}
