@@ -1,0 +1,36 @@
+import java.util.*;
+
+class Solution {
+    public int[] solution(String[] gems) {
+    int[] range = {1,gems.length};
+    Set<String> set = new HashSet<>();
+        for(String str : gems)
+            set.add(str);
+        Map<String,Integer> map = new HashMap<>();
+        int start = 0, end = 0;
+        map.put(gems[0],1);
+        while(start != gems.length && end != gems.length){
+            if(set.size() == map.size()){
+                if(end - start < range[1] - range[0])
+                {
+                   range[0] = start + 1;
+                    range[1] = end + 1; 
+                }
+                if(map.get(gems[start]) == 1)
+                    map.remove(gems[start]);
+                else  map.put(gems[start], map.get(gems[start]) - 1);
+        
+               start++; 
+            }
+                    
+                else  {
+                    end++;
+                if (end == gems.length) {
+                    break;
+                }
+                map.put(gems[end], map.getOrDefault(gems[end], 0) + 1);
+            }
+        }
+        return range;
+    }
+}
