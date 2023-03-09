@@ -1,22 +1,21 @@
-import java.util.*;
-
-class Solution {
-    public int solution(int cacheSize, String[] cities) {
+ public static int solution(int cacheSize, String[] cities) {
         int answer = 0;
-        Map<String, Integer> cache = new LinkedHashMap<String, Integer>(cacheSize, 0.75f, true) {
-            protected boolean removeEldestEntry(Map.Entry<String, Integer> eldest) {
-                return size() > cacheSize;
-            }
-        };
+        LinkedList<String> cache = new LinkedList<String>();
         for (String city : cities) {
             city = city.toLowerCase();
-            if (cache.containsKey(city)) {
+            if (cache.contains(city)) {
+                cache.remove(city);
+                cache.add(city);
                 answer += 1;
             } else {
+                if (cache.size() >= cacheSize) {
+                    cache.poll();
+                }
+                if (cacheSize > 0) {
+                    cache.add(city);
+                }
                 answer += 5;
             }
-            cache.put(city, 0);
         }
         return answer;
     }
-}
