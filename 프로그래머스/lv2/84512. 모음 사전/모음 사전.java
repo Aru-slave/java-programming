@@ -1,14 +1,25 @@
 class Solution {
+    int count = 0;
+    int ans = 0;
     public int solution(String word) {
-        int answer = 0;
-        int[] nums = {781, 156, 31, 6, 1};
-        String vowels = "AEIOU";
-
-        for (int i = 0; i < word.length(); i++) {
-            char c = word.charAt(i);
-            answer += vowels.indexOf(c) * nums[i] + 1;
+        String str = "AEIOU";
+        StringBuilder sb = new StringBuilder();
+        dfs(str,sb,word);
+        return ans;
+                
+    }
+    public void dfs(String str, StringBuilder nowWord,String word){
+        if(nowWord.toString().equals(word)){
+        ans = count;
         }
-
-        return answer;
+        if(nowWord.length() == 5){
+       return;
+        }
+        for(int i = 0; i < str.length(); i++){
+            nowWord.append(str.charAt(i));
+            count++;
+            dfs(str,nowWord,word);
+            nowWord.deleteCharAt(nowWord.length() - 1);
+        }
     }
 }
