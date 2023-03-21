@@ -9,7 +9,7 @@ public int solution(int[] elements) {
         int sum = 0;
         for (int j = i; j < i + n; j++) {
             sum += elements[j % n];
-            if (sum > 0 && set.add(sum)) {
+            if (set.add(sum)) {
                 count++;
             }
         }
