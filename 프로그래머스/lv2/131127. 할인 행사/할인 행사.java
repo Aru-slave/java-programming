@@ -1,19 +1,28 @@
+import java.util.*;
+
 class Solution {
-       static public int solution(String[] want, int[] number, String[] discount) {
-        int answer = 0;
-        for(int i=0;i<discount.length-9;i++) {
-            int j;
-            for(j=0;j<want.length;j++) {
-                int check=0;
-                for(int k=i;k<i+10;k++) {
-                    if(discount[k].equals(want[j])) check++;
-                }        
-                if(check<number[j]) {
-                     break;
+    public int solution(String[] want, int[] number, String[] discount) {
+        int count = 0;
+        for(int i = 0; i < discount.length - 9; i++){
+            Map<String,Integer> map = new HashMap<>();
+            Set<String> set = new HashSet<>();
+            for(int k = i; k < i+10; k++){
+                map.put(discount[k], map.getOrDefault(discount[k], 0) + 1);
+            }
+            for(int j = 0; j < want.length; j++){
+                if(map.containsKey(want[j])){
+                    if(map.get(want[j]) == number[j]){
+                        set.add(want[j]);
+                        if(set.size() == want.length){
+                            count++;
+                        }
+                    }
+                }
+                else{
+                    break;
                 }
             }
-           if(j==want.length) answer ++;
         }
-        return answer;
+        return count;
     }
 }
