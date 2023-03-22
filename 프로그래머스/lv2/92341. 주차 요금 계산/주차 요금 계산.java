@@ -31,9 +31,10 @@ class Solution {
             ans.put(key,fee);
         }
         return ans.entrySet().stream()
-                .sorted(Map.Entry.comparingByKey())
+                .sorted((e1, e2) -> Integer.valueOf(e1.getKey()) - Integer.valueOf(e2.getKey()))
                 .mapToInt(Map.Entry::getValue)
                 .toArray();
+
     }
 
     public int charge(int time, int[] fees) {
