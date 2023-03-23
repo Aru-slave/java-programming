@@ -1,20 +1,19 @@
 class Solution {
     public String solution(String number, int k) {
-        StringBuilder answer = new StringBuilder();
         int len = number.length() - k;
-        int start = 0, end = k;
-        while (len > 0) {
-            int maxIdx = start;
-            for (int i = start + 1; i <= end; i++) {
-                if (number.charAt(i) > number.charAt(maxIdx)) {
-                    maxIdx = i;
+        StringBuilder answer = new StringBuilder();
+
+        for (int i = 0, idx = -1; i < len; i++) {
+            char maxNum = '0';
+            for (int j = idx + 1; j <= k + i; j++) {
+                if (number.charAt(j) > maxNum) {
+                    maxNum = number.charAt(j);
+                    idx = j;
                 }
             }
-            answer.append(number.charAt(maxIdx));
-            start = maxIdx + 1;
-            end++;
-            len--;
+            answer.append(maxNum);
         }
+
         return answer.toString();
     }
 }
