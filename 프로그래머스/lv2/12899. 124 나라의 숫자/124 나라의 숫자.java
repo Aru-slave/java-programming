@@ -8,8 +8,7 @@ class Solution {
                 sb.append(2);
              if(n % 3 == 0)
                 sb.append(4);
-            n = n -1;
-            n = n / 3;
+            n = (n - 1) / 3;
         }
         return sb.reverse().toString();
     }
