@@ -1,32 +1,38 @@
 import java.util.*;
-
 class Solution {
     public int solution(int N, int number) {
-        List<Set<Integer>> setList = new ArrayList<>();
-        for (int i = 0; i < 8; i++) {
-            Set<Integer> set = new HashSet<>();
-            int num = 0;
-            for (int j = 0; j <= i; j++) {
-                num = num * 10 + N;
-            }
-            set.add(num);
-            for (int j = 0; j < i; j++) {
-                for (int x : setList.get(j)) {
-                    for (int y : setList.get(i - j - 1)) {
-                        set.add(x + y);
-                        set.add(x - y);
-                        set.add(x * y);
-                        if (y != 0) {
-                            set.add(x / y);
+       int answer = -1;
+        Set<Integer>[] setArr = new Set[9];
+        int t = N;
+        for(int i = 1; i < 9; i++) {
+            setArr[i] = new HashSet<>();
+            setArr[i].add(t);
+            t = t * 10 + N;
+        }
+        for(int i = 1; i < 9; i++) {
+            for(int j = 1; j < i; j++) {
+                for(Integer a : setArr[j]) {
+                    for(Integer b : setArr[i - j]) {
+                        setArr[i].add(a + b);
+                        setArr[i].add(a - b);
+                        setArr[i].add(b - a);
+                        setArr[i].add(a * b);
+                        if(b != 0) {
+                            setArr[i].add(a / b);
+                        }
+                        if(a != 0) {
+                            setArr[i].add(b / a);
                         }
                     }
                 }
             }
-            setList.add(set);
-            if (set.contains(number)) {
-                return i + 1;
+        }
+        for(int i = 1; i < 9; i++) {
+            if(setArr[i].contains(number)) {
+                answer = i;
+                break;
             }
         }
-        return -1;
+        return answer;
     }
 }
