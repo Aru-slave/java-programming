@@ -9,6 +9,7 @@ def solution(cacheSize, cities):
                 time += 5
             else:
                 time += 1
+                cache.remove(cities[i].lower())
             cache.append(cities[i].lower())    
         else:
             if cities[i].lower() not in cache:
