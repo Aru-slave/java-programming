@@ -9,8 +9,7 @@ def dfs(k, dungeons, depth, used):
     for i in range(len(dungeons)):
         if dungeons[i][0] <= k and i not in used:
             used.append(i)
-            new_depth = dfs(k - dungeons[i][1], dungeons, depth + 1, used)
+            max_depth = max(max_depth, dfs(k - dungeons[i][1], dungeons, depth + 1, used))
             used.remove(i)
-            max_depth = max(max_depth, new_depth)
 
     return max_depth
