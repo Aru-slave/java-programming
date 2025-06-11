@@ -6,15 +6,10 @@ class Solution {
         int endOpTime = Integer.parseInt(op_end.substring(0,2)) * 60 + Integer.parseInt(op_end.substring(3,5));
         int runningTime = Integer.parseInt(video_len.substring(0,2)) * 60 + Integer.parseInt(video_len.substring(3,5));
 
+        if(curTime <= endOpTime && curTime >= startOpTime)
+            curTime = endOpTime;
         for(int i = 0; i < commands.length; i++)
         {
-            if(curTime < 0 )
-                curTime = 0;
-            if(curTime <= endOpTime && curTime >= startOpTime)
-                curTime = endOpTime;
-            if(curTime >= runningTime)
-                curTime = runningTime;
-
             switch(commands[i])
             {
                 case "prev":
@@ -24,14 +19,14 @@ class Solution {
                     curTime += 10;
                     break;
             }
-            System.out.println(curTime);
+            if(curTime < 0 )
+                curTime = 0;
+            if(curTime <= endOpTime && curTime >= startOpTime)
+                curTime = endOpTime;
+            if(curTime >= runningTime)
+                curTime = runningTime;
         }
-        if(curTime <= endOpTime && curTime >= startOpTime)
-            curTime = endOpTime;
-        if(curTime >= runningTime)
-            curTime = runningTime;
-        if(curTime < 0 )
-            curTime = 0;
+
         int curHours = curTime / 60;
         int curtMins = curTime % 60;
         
