@@ -2,17 +2,10 @@ import java.util.*;
 
 class Solution {
     public long[] solution(int x, int n) {
-        long[] answer = null;
-        LinkedList<Long> list = new LinkedList<>();
-        //x는 시작점, n은 증가하는 폭
-        
-        for(int i = 0; i < n; i++)
-        {
-            list.add(((long)x + (long)x * i));
-        }
-        answer = new long[list.size()];
-        for(int i = 0; i < n; i++)
-            answer[i] = list.get(i);
+        long[] answer = new long[n];
+        answer[0] = x;//시작 점.
+        for(int i = 1; i < n; i++)
+            answer[i] = answer[i-1] + (long)x;
         return answer;
     }
 }
